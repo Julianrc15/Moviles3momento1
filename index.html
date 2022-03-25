@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <title>Momento 1</title>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- <h1>Prueba de Desempeño y producto momento I</h1> -->
+        <hr>
+
+        <div class="row">
+           
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Inmuebles</h3>
+                    <hr>
+                    
+                    <form>
+                        <div class="mb-3">
+                          
+                          <input type="text" class="form-control" id="idInmueble" autocomplete="off" placeholder="Ingrese Id del inmueble" required>
+                            <label id="mensajeId" class="form-label" style="color: red"></label>
+
+                        </div>
+                        <div class="mb-3">
+                          
+                          <input type="text" class="form-control" id="direccionInmueble" autocomplete="off" placeholder="Ingrese dirección del inmueble" required > 
+                            <label id="mensajeDireccion" class="form-label" style="color: red"></label>
+
+                        </div>
+                        
+                        <div class="mb-3">
+                        
+                            <input type="text" class="form-control" id="telefonoInmueble" autocomplete="off" placeholder="Ingrese número de telefono del inmueble">
+                            <label id="mensajetelefono" class="form-label" style="color: red"></label>
+                            
+                        </div>
+                        <div class="mb-3">
+                        
+                            <input type="text" class="form-control" id="valorInmueble" autocomplete="off" placeholder="Ingrese valor del Inmueble" required>
+                            <label id="mensajeValor" class="form-label" style="color: red"></label>
+                            
+                        </div>
+
+                        <!-- select     -->
+                        <select class="form-select mb-3" id="disponibilidad" >
+                            <option selected>Disponibilidad del inmueble</option>
+                            <option value=true>Disponible</option>
+                            <option value=false>No disponible</option>
+                            
+                        </select>
+
+                        <!-- form -->
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn btn-success"  id="btnEnviar" type="button" onclick="recuperarInmueble()">Enviar inmueble</button>
+                        </div>
+
+                        <br>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn btn-primary"  id="btnBuscar" type="button" onclick="buscarInmueble()">Buscar inmueble</button>
+                        </div>
+
+                       
+                    </form>
+
+                      
+                    
+                    
+
+
+                </div>
+            <div class="col-6 col-md-8" id="listaTrabajadores">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary"  id="btnListar" type="button">Lista de Inmuebles</button>
+                        
+                </div>
+                <br>
+                <label id="cargando"></label>
+                
+                <div id="listadoInmuebles"></div>  
+
+                
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="funciones.js"></script>    
+      
+    <!-- <script type="text/javascript" src="/listarUsuarios.js"></script>   -->
+
+</body>
+</html>
