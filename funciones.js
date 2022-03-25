@@ -13,6 +13,7 @@ let disponible = disponibilidad.value;
 
 let btnEnviar = document.getElementById("btnEnviar");
 let btnBuscar = document.getElementById("btnBuscar");
+let btnListar= document.getElementById("btnListar");
 
 
 
@@ -56,7 +57,7 @@ let inmuebles=[{
     idInmueble:2,
     direccionInmueble:"calle 134",
     telefonoInmueble:4373802568,
-    valorInmueble:100000000,
+    valorInmueble:243000000,
     disponibilidad:true
 },
 {
@@ -92,7 +93,7 @@ disponibilidad:true
     idInmueble:7,
 direccionInmueble:"calle 987",
 telefonoInmueble:3989587568,
-valorInmueble:450000000,
+valorInmueble:275000000,
 disponibilidad:true
 
 },
@@ -114,7 +115,7 @@ disponibilidad:false
     idInmueble:10,
 direccionInmueble:"calle 7992",
 telefonoInmueble:456802568,
-valorInmueble:500000000,
+valorInmueble:	295000000,
 disponibilidad:false
 }]
 
@@ -141,24 +142,21 @@ async function recuperarInmueble () {
     }
 }
 
-
-
-
-
-
-/*****************************************************************/
+/********************************************************************************/
 
 //BUSCAR POR ID
 
 function buscarInmueble(){
 
     inmuebles.filter(function(inmueble){
-        if (idInmueble===gitidInmueble.value && inmueble.disponibilidad == true ){
+        if (idInmueble.value ==idInmueble && inmueble.disponibilidad == true ){
             document.getElementById('direccionInmueble').value= inmueble.direccionInmueble;
             document.getElementById('telefonoInmueble').value= inmueble.telefonoInmueble;
             document.getElementById('valorInmueble').value= inmueble.valorInmueble;
             // document.getElementById('disponipilidad').value= inmueble.disponipilidad;
         }else{
+
+
          alert('no se encuentra')
         }
     })
@@ -166,34 +164,39 @@ function buscarInmueble(){
 
 }
 
-
-
-
-
-
-//listar
+// Listar inmuebles....................
 
 
 function promesaListarInmuebles(){
     return new Promise((resolve, reject) =>{
         console.log ("Cargando los inmuebles")
-
+    
         setTimeout(() =>{
 
-        let estado =true;
-        if(estado){
-            resolve(inmuebles)
+        //buscar parametros
+        let filtrarlista= inmuebles.filter(function(inmueble){
+            return(inmueble.valorInmueble>200000000 && inmueble.valorInmueble<300000000 && inmueble.disponibilidad == true ) })
+            console.log(filtrarlista)
+        
+        //validar que hayan resultados
+        if(filtrarlista.length>0){
+            resolve(filtrarlista)
         }else{
-            reject(alert("Eyyy"))
+            reject(
+                
+                document.getElementById('listadoInmuebles').innerHTML = `<label>No se encontraron propiedades disponibles</label>`)
         }
-
 
         },3000)
     })
+
+    
 }
 
+//ejecutar la promesa desde el boton, btnListar es el elemento (boton que inicia el proceso), click, luego dentro de funcion llamar la promesa
 
-promesaListarInmuebles(inmuebles)
+
+btnListar.addEventListener("click",function(){promesaListarInmuebles(inmuebles)
     .then((data)=>{
         //Recorrer arreglo de objetos
         let html = "";
@@ -214,13 +217,4 @@ promesaListarInmuebles(inmuebles)
         document.getElementById('listadoInmuebles').innerHTML = error;
     })
 
-
-
-
-
-
-
-
-
-
-       
+})
