@@ -1,7 +1,7 @@
 let idInmueble = document.getElementById("idInmueble");
 let id = idInmueble.value;
 
-console.log(id);
+
 
 let direccionInmueble = document.getElementById("direccionInmueble");
 let telefonoInmueble = document.getElementById("telefonoInmueble");
@@ -129,26 +129,47 @@ disponibilidad:false
 
 //crear funcion para enviar inmuebles
 
-const obtenerInmueble= ()=> {
+const obtenerInmueble = ()=> {
     return new Promise((resolve, reject)=>{
-        if(idInmueble.value ==='' || direccionInmueble.value==='' || telefonoInmueble.value==='' || valorInmueble.value<100000000 || valorInmueble.value>5000000){
-            alert("Ingrese todos los datos según se sugiere")
+        let idInmueble = document.getElementById("idInmueble");
+        let id = idInmueble.value;
+
+
+
+        let direccionInmueble = document.getElementById("direccionInmueble");
+        let direccion = direccionInmueble.value;
+        let telefonoInmueble = document.getElementById("telefonoInmueble");
+        let telefono=telefonoInmueble.value;
+        let valorcasa = parseInt(document.getElementById("valorInmueble"));
+        let valor=valorcasa.value;
+
+        
+        if( id==='' || direccion ==='' || telefono ===''){
+            alert("dijite id y direccion")
+            
+        }else{
+            setTimeout(()=> {
+                resolve(alert("datos enviados correctamente"))
+            },1500)
         }
-        setTimeout(() =>{
-            alert("Inmueble enviado correctamente")
-            resolve(inmuebles)
-        },2000)
+
     })
 }
 
 async function recuperarInmueble () {
-    try {
-        let inmuebleRecuperado = await obtenerInmueble();
-        console.log(inmuebleRecuperado);
-    }catch(err){
-
+        try {
+            let inmuebleRecuperado = await obtenerInmueble();
+            console.log(inmuebles);
+        }catch(err){
+    
+        }
     }
-}
+
+btnEnviar.addEventListener("click",function(){
+    recuperarInmueble ()
+})
+
+
 
 /********************************************************************************/
 
@@ -156,20 +177,23 @@ async function recuperarInmueble () {
 
 function buscarPorId() {
     return new Promise((resolve, reject) => {
+
+        let idInmueble = document.getElementById("idInmueble");
+        let id = idInmueble.value;
         console.log("Buscando Inmueble")
 
         setTimeout(() => {
             //buscar parametros
             let inmuebleporID = inmuebles.filter(function (inmueble){
                 return(inmueble.idInmueble == id && inmueble.disponibilidad == true) })
-
+                console.log(id)
                 console.log(inmuebleporID)
 
                 //validar que haya resultados
                 if(inmuebleporID.length>0){
                     resolve(inmuebleporID)
                 }else{
-                    reject (alert)
+                    reject (alert("Inmueble no encontrado o no disponible"))
                 }
            
         },3000)
@@ -189,7 +213,7 @@ btnBuscar.addEventListener("click",function(){
         }
         })
         .catch((error)=>{
-            alert(error)
+            
         })
 })
 
@@ -250,12 +274,6 @@ btnListar.addEventListener("click",function(){promesaListarInmuebles(inmuebles)
 
 })
 
-// btnBuscar.addEventListener("click",function(){
 
-// let inmuebleporID = inmuebles.filter(function (inmueble){
-//     return(inmueble.idInmueble == idInmueble && inmueble.disponibilidad == true)})
-
-//     console.log(inmuebleporID)
-// })
 
 
