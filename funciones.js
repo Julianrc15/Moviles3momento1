@@ -1,7 +1,15 @@
 let idInmueble = document.getElementById("idInmueble");
+let id = idInmueble.value;
+
+console.log(id);
+
 let direccionInmueble = document.getElementById("direccionInmueble");
 let telefonoInmueble = document.getElementById("telefonoInmueble");
 let valorInmueble = document.getElementById("valorInmueble");
+
+
+
+
 
 
 let disponibilidad = document.getElementById("disponibilidad");
@@ -112,7 +120,7 @@ valorInmueble:150000000,
 disponibilidad:false
 },
 {
-    idInmueble:10,
+idInmueble:10,
 direccionInmueble:"calle 7992",
 telefonoInmueble:456802568,
 valorInmueble:	295000000,
@@ -146,23 +154,46 @@ async function recuperarInmueble () {
 
 //BUSCAR POR ID
 
-function buscarInmueble(){
+function buscarPorId() {
+    return new Promise((resolve, reject) => {
+        console.log("Buscando Inmueble")
 
-    inmuebles.filter(function(inmueble){
-        if (idInmueble.value ==idInmueble && inmueble.disponibilidad == true ){
-            document.getElementById('direccionInmueble').value= inmueble.direccionInmueble;
-            document.getElementById('telefonoInmueble').value= inmueble.telefonoInmueble;
-            document.getElementById('valorInmueble').value= inmueble.valorInmueble;
-            // document.getElementById('disponipilidad').value= inmueble.disponipilidad;
-        }else{
+        setTimeout(() => {
+            //buscar parametros
+            let inmuebleporID = inmuebles.filter(function (inmueble){
+                return(inmueble.idInmueble == id && inmueble.disponibilidad == true) })
 
+                console.log(inmuebleporID)
 
-         alert('no se encuentra')
-        }
+                //validar que haya resultados
+                if(inmuebleporID.length>0){
+                    resolve(inmuebleporID)
+                }else{
+                    reject (alert)
+                }
+           
+        },3000)
     })
-
-
 }
+
+//ejectuar promesa
+
+btnBuscar.addEventListener("click",function(){
+    buscarPorId(inmuebles)
+        .then((data)=>{
+            for(let i=0; i<data.length; i++){
+            document.getElementById('direccionInmueble').value= data[i].direccionInmueble;
+            document.getElementById('telefonoInmueble').value= data[i].telefonoInmueble;
+            document.getElementById('valorInmueble').value= data[i].valorInmueble;
+            // document.getElementById('disponipilidad').value= data[i].disponipilidad;
+        }
+        })
+        .catch((error)=>{
+            alert(error)
+        })
+})
+
+
 
 // Listar inmuebles....................
 
@@ -218,3 +249,13 @@ btnListar.addEventListener("click",function(){promesaListarInmuebles(inmuebles)
     })
 
 })
+
+// btnBuscar.addEventListener("click",function(){
+
+// let inmuebleporID = inmuebles.filter(function (inmueble){
+//     return(inmueble.idInmueble == idInmueble && inmueble.disponibilidad == true)})
+
+//     console.log(inmuebleporID)
+// })
+
+
