@@ -144,12 +144,13 @@ const obtenerInmueble = ()=> {
         let valor=valorcasa.value;
 
         
-        if( id==='' || direccion ==='' || telefono ===''){
-            alert("dijite id y direccion")
+        if( id==='' || direccion ==='' || telefono ==='' ||valorInmueble.value<100000000 ||valorInmueble.value>500000000){
+            
+            alert("Dijite los datos según las sugerencias")
             
         }else{
             setTimeout(()=> {
-                resolve(alert("datos enviados correctamente"))
+                resolve(alert("Datos enviados correctamente"))
             },1500)
         }
 
@@ -157,6 +158,7 @@ const obtenerInmueble = ()=> {
 }
 
 async function recuperarInmueble () {
+        
         try {
             let inmuebleRecuperado = await obtenerInmueble();
             console.log(inmuebles);
@@ -167,6 +169,7 @@ async function recuperarInmueble () {
 
 btnEnviar.addEventListener("click",function(){
     recuperarInmueble ()
+    // console.log(valorInmueble.value);
 })
 
 
